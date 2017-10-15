@@ -1,3 +1,5 @@
+'use strict';
+
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -14,6 +16,7 @@ exports.config = {
     ],
     cucumberOpts: {
         require: 'features/steps/*_steps.js',
-        format: 'pretty'
+        format: 'summary',
+        strict: true
     }
-}
+};

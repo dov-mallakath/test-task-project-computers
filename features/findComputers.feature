@@ -1,12 +1,12 @@
-Feature: Search Operations
-  As a user of the computers DB
-  I would like to find existing computers
-  So that I can edit them
-
-  Scenario: Find computers
-    Given The computers page is opened
-    When I search for 123
-    Then I will see No Computers Found header
+#Feature: Search Operations
+#  As a user of the computers DB
+#  I would like to find existing computers
+#  So that I can edit them
+#
+#  Scenario: Find computers
+#    Given The computers page is opened
+#    When I search for 123
+#    Then I will see No Computers Found header
 
 #  Scenario: Should use add operator by default
 #    Given The calculator is open

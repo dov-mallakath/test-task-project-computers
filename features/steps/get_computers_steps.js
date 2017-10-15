@@ -1,18 +1,20 @@
-var chai = require('chai').use(require('chai-as-promised'));
-var expect = chai.expect;
+'use strict';
 
-var GetComputersSteps = function() {
+let chai = require('chai').use(require('chai-as-promised'));
+let expect = chai.expect;
+
+let GetComputersSteps = function () {
 
     const EXPECTED_TITLE = "No computers found";
 
-    var ComputersPage = require("../pages/get_computers_page");
+    let GetComputersPage = require("../pages/get_computers_page");
 
     this.World = function MyWorld() {
-        this.page = new ComputersPage();
+        this.page = new GetComputersPage();
     };
 
     this.Given('The computers page is opened', function (callback) {
-        this.page.get();
+        this.page.openComputersListPage();
         callback();
     });
 
@@ -33,7 +35,6 @@ var GetComputersSteps = function() {
     //     expect(this.page.getPageHeader()).to.eventually.equal('No Computers Found').and.notify(callback);
     //     callback(null, 'pending');
     // });
-
 
 
     // this.When('I calculate $first $operator $second', function (first, operator, second, callback) {
