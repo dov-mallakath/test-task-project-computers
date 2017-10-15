@@ -18,6 +18,10 @@ Feature: Create record about computer
     Then All form data is present and valid
     When I enter wrong data for Date fields
     Then Fields are highlighted, computer not updated
+    When I press cancel button
+    Then I return to the search page and make a search again
+    When I open the created computer again
+    Then Incorrect data is not saved
     When I enter correct data for Date fields
     Then Computer is updated and saved
     When I search the updated computer by name "TestPC001"

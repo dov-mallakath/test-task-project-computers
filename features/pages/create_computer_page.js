@@ -7,14 +7,14 @@ class CreateComputerPage {
         this.computerName = $("input[name=name]");
         this.introducedDate = $("input[name=introduced]");
         this.discontinuedDate = $("input[name=discontinued]");
-        this.company = $("select[name=company]");
+        this.selectCompany = $("select[name=company]");
         this.createButton = $("input[class=\"btn primary\"]");
         this.cancelButton = $("a[class=btn]");
         this.deleteButton = $("input[class=\"btn danger\"]");
         this.deleteButtonArray = element.all(by.css('danger'));
-        this.errorDiv = $("div[class=\"clearfix error\"]");
         this.errorDivArray = element.all(by.css('error'));
         this.headerH1 = element(by.xpath("//*[@id=\"main\"]/h1"));
+        this.optionsCompanies = element.all(by.xpath("//select[@name=\"company\"]/option"))
     };
 
     getPageHeader() {

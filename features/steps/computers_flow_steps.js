@@ -129,21 +129,54 @@ let CreateComputerPage = require("../pages/create_computer_page");
 
         When('I enter wrong data for Date fields', function () {
             this.page.enterIntroducedDate("2017-01-32");
-            return this.page.enterDiscontinuedDate("2018-13-01");
+            this.page.enterDiscontinuedDate("2018-13-01");
+            return this.page.createNewComputer();
         });
 
         Then('Fields are highlighted, computer not updated', function (callback) {
+            callback();
             expect(this.page.errorDivArray.then(function (items) {
-                return items.length;
+                return items.size;
             }).catch((error) => {
                 assert.equal(error,'Promise error');
                 done();
             })).to.eventually.equal(2).and.notify(callback);
         });
 
+        When('I press cancel button', function () {
+            return this.page.cancelButton.click();
+        });
+
+        Then('I return to the search page and make a search again', function (callback) {
+            this.pageGet = new GetComputersPage();
+            this.pageGet.setSearchValue(COMPUTER);
+            this.pageGet.pressSearchButton();
+            expect(this.pageGet.getPageHeader()).to.eventually.equal(COMPUTER_FOUND).and.notify(callback);
+            expect(this.pageGet.computersLink.then(function (items) {
+                return items.length;
+            }).catch((error) => {
+                assert.equal(error,'Promise error');
+                done();
+            })).to.eventually.equal(1).and.notify(callback);
+        });
+
+        When('I open the created computer again', function () {
+            return this.pageGet.getFirstComputer().click();
+        });
+
+        Then('Incorrect data is not saved', function (callback) {
+            this.page = new CreateComputerPage();
+            expect(this.page.getPageHeader()).to.eventually.equal(COMPUTER_EDIT).and.notify(callback);
+            expect(this.page.getComputerName()).to.eventually.equal(COMPUTER).and.notify(callback);
+            expect(this.page.getIntroducedDate()).to.eventually.equal("").and.notify(callback);
+            expect(this.page.getDiscontinuedDate()).to.eventually.equal("").and.notify(callback);
+            callback();
+        });
+
         When('I enter correct data for Date fields', function () {
             this.page.enterIntroducedDate(INTRODUCED_DATE);
-            return this.page.enterDiscontinuedDate(DISCONTINUED_DATE);
+            this.page.enterDiscontinuedDate(DISCONTINUED_DATE);
+            return this.page.createNewComputer();
         });
 
         Then('Computer is updated and saved', function (callback) {
