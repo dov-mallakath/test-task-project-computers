@@ -5,14 +5,17 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "assert": "^1.4.1",
     "cucumber": "^3.0.5",
     "cucumber-assert": "^2.0.0",
     "protractor": "^5.1.1",
     "protractor-cucumber-framework": "^4.0.8",
     "is-generator": "^1.0.3",
     "bluebird": "^3.5.1",
-    "moment": "^2.19.1"
+    "moment": "^2.19.1",
+    "cucumber-html-report": "^0.6.2",
+    "cucumber-html-reporter": "^3.0.4",
+    "cucumberjs-allure-reporter": "^1.0.3",
+    "mkdirp": "^0.5.1"
   },
   "scripts": {
     "prestart-webdriver": "webdriver-manager update",

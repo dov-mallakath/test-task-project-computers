@@ -17,7 +17,6 @@ class GetComputersPage {
     };
 
     openComputersListPage() {
-        browser.manage().window().maximize();
         browser.get(this.computersUrl);
     };
 

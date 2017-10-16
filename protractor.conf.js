@@ -1,5 +1,8 @@
 'use strict';
 
+const jsonReports = process.cwd() + "/reports/json";
+const Reporter = require("./support/reporter.js");
+
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -15,8 +18,17 @@ exports.config = {
         'features/*.feature'
     ],
     cucumberOpts: {
-        require: 'features/steps/*_steps.js',
-        format: 'summary',
+        require: ['features/steps/*_steps.js','../support/*.j'],
+        format: ['summary', 'json:./reports/json/cucumber_report.json'],
         strict: true
+    },
+    onPrepare: function() {
+        browser.ignoreSynchronization = true;
+        browser.manage().window().maximize();
+        Reporter.createDirectory(jsonReports);
+    },
+    onComplete: function () {
+        Reporter.createHTMLReport();
+        Reporter.createAllureXML();
     }
 };
