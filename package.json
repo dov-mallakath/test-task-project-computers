@@ -14,7 +14,9 @@
     "cucumber": "^3.0.5",
     "cucumber-assert": "^2.0.0",
     "protractor": "^5.1.1",
-    "protractor-cucumber-framework": "^4.0.8"
+    "protractor-cucumber-framework": "^4.0.8",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1"
   },
   "scripts": {
     "prestart-webdriver": "webdriver-manager update",

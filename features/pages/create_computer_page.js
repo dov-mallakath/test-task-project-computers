@@ -1,5 +1,9 @@
 'use strict';
 
+require("babel-core").transform("code", {
+    plugins: ["transform-async-to-generator"]
+});
+
 class CreateComputerPage {
 
     constructor() {
@@ -15,6 +19,7 @@ class CreateComputerPage {
         this.errorDivArray = element.all(by.css('error'));
         this.headerH1 = element(by.xpath("//*[@id=\"main\"]/h1"));
         this.optionsCompanies = element.all(by.xpath("//select[@name=\"company\"]/option"))
+        this.selectedCompany = element(by.xpath("//select[@name=\"company\"]/option[@selected]"))
     };
 
     getPageHeader() {
@@ -45,10 +50,12 @@ class CreateComputerPage {
         this.discontinuedDate.sendKeys(discontinuedDate);
     };
 
-    selectManufacturer() {
-        this.company.$('[value="age"]').click();
+    selectManufacturerByIndex(companyIndex) {
+        this.selectCompany.click();
+        let selectedCompany = this.optionsCompanies.get(companyIndex).getText();
+        this.optionsCompanies.get(companyIndex).click();
+        return selectedCompany;
     };
-
 
 
     createNewComputer() {
@@ -63,7 +70,9 @@ class CreateComputerPage {
         this.deleteButton.click();
     }
 
-
+    getSelectedCompany() {
+        return this.selectedCompany.getText();
+    }
 
     isElementPresent(element) {
         let present = false;
@@ -77,39 +86,23 @@ class CreateComputerPage {
         return this.createButton.isPresent();
     };
 
-
-
-
     isElementDisplayed(element) {
 
-        element.isDisplayed().then(function(visible){
-                if (visible) {
-                    // click on the element
-                    return true;
-                }
-                // Not visible yet, but it is in the DOM, then try again
-                return false;
-            }).catch(function(){
+        element.isDisplayed().then(function (visible) {
+            if (visible) {
+                // click on the element
+                return true;
+            }
+            // Not visible yet, but it is in the DOM, then try again
+            return false;
+        }).catch(function () {
             // Element not found in the DOM, try again
-                return false;
-            })
+            return false;
+        })
     };
 
-    // this.setOperator = function(value) {
-    //   element(by.model('operator')).element(by.cssContainingText('option', value)).click();
-    // };
-    //
-    // this.getResult = function() {
-    //   return element(by.binding('latest')).getText();
-    // };
-    //
-    // this.clickGo = function() {
-    //   element(by.id('gobutton')).click()
-    // }
-
-
     urlChanged(url) {
-        return browser.getCurrentUrl().then(function(actualUrl) {
+        return browser.getCurrentUrl().then(function (actualUrl) {
             return url != actualUrl;
         });
     };

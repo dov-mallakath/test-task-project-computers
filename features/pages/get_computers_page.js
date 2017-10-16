@@ -4,18 +4,21 @@ class GetComputersPage {
 
     constructor() {
         browser.waitForAngularEnabled(false);
-        this.computers = "../computers";
+        this.computersUrl = "../computers";
         this.searchInput = $("input[id=searchbox]");
         this.searchButton = $("input[id=searchsubmit]");
         this.addButton = $("a[id=add]");
         this.headerH1 = element(by.xpath("//*[@id=\"main\"]/h1"));
         this.messageWarning = $("div[class=\"alert-message warning\"]")
         this.computersLink = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[1]/a"));
+        this.introduced = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[2]"));
+        this.discontinued = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[2]"));
+        this.company = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[3]"));
     };
 
     openComputersListPage() {
         browser.manage().window().maximize();
-        browser.get(this.computers);
+        browser.get(this.computersUrl);
     };
 
     setSearchValue(value) {
@@ -41,6 +44,18 @@ class GetComputersPage {
 
     getFirstComputer() {
         return this.computersLink.get(0)
+    }
+
+    getFirstIntroduced() {
+        return this.introduced.get(0).getText()
+    }
+
+    getFirstDiscontinued() {
+        return this.discontinued.get(0).getText()
+    }
+
+    getFirstCompany() {
+        return this.company.get(0).getText()
     }
 
     // this.setOperator = function(value) {
