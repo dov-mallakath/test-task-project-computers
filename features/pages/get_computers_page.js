@@ -12,8 +12,8 @@ class GetComputersPage {
         this.messageWarning = $("div[class=\"alert-message warning\"]")
         this.computersLink = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[1]/a"));
         this.introduced = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[2]"));
-        this.discontinued = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[2]"));
-        this.company = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[3]"));
+        this.discontinued = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[3]"));
+        this.company = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[4]"));
     };
 
     openComputersListPage() {

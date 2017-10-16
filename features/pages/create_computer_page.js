@@ -1,8 +1,5 @@
 'use strict';
-
-require("babel-core").transform("code", {
-    plugins: ["transform-async-to-generator"]
-});
+let moment = require('moment');
 
 class CreateComputerPage {
 
@@ -15,10 +12,10 @@ class CreateComputerPage {
         this.createButton = $("input[class=\"btn primary\"]");
         this.cancelButton = $("a[class=btn]");
         this.deleteButton = $("input[class=\"btn danger\"]");
-        this.deleteButtonArray = element.all(by.css('danger'));
-        this.errorDivArray = element.all(by.css('error'));
+        this.deleteButtonArray = element.all(by.xpath("//input[@class='btn danger']"));
+        this.errorDivArray = element.all(by.xpath("//div[@class='clearfix error']"));
         this.headerH1 = element(by.xpath("//*[@id=\"main\"]/h1"));
-        this.optionsCompanies = element.all(by.xpath("//select[@name=\"company\"]/option"))
+        this.optionsCompanies = element.all(by.xpath("//select[@name=\"company\"]/option"));
         this.selectedCompany = element(by.xpath("//select[@name=\"company\"]/option[@selected]"))
     };
 
@@ -27,15 +24,15 @@ class CreateComputerPage {
     };
 
     getComputerName() {
-        return this.computerName.getText();
+        return this.computerName.getAttribute('value');
     };
 
     getIntroducedDate() {
-        return this.introducedDate.getText();
+        return this.introducedDate.getAttribute('value');
     };
 
     getDiscontinuedDate() {
-        return this.discontinuedDate.getText();
+        return this.discontinuedDate.getAttribute('value');
     };
 
     enterComputerName(computerName) {
@@ -52,9 +49,8 @@ class CreateComputerPage {
 
     selectManufacturerByIndex(companyIndex) {
         this.selectCompany.click();
-        let selectedCompany = this.optionsCompanies.get(companyIndex).getText();
         this.optionsCompanies.get(companyIndex).click();
-        return selectedCompany;
+        return this.optionsCompanies.get(companyIndex).getText();
     };
 
 
@@ -64,41 +60,14 @@ class CreateComputerPage {
 
     cancelNewComputerCreation() {
         this.cancelButton.click();
-    }
+    };
 
     deleteComputer() {
         this.deleteButton.click();
-    }
+    };
 
     getSelectedCompany() {
         return this.selectedCompany.getText();
-    }
-
-    isElementPresent(element) {
-        let present = false;
-        element.isPresent().then(function (isVisible) {
-            present = expect(isVisible).to
-        });
-        return present;
-    }
-
-    createButtonIsPresent() {
-        return this.createButton.isPresent();
-    };
-
-    isElementDisplayed(element) {
-
-        element.isDisplayed().then(function (visible) {
-            if (visible) {
-                // click on the element
-                return true;
-            }
-            // Not visible yet, but it is in the DOM, then try again
-            return false;
-        }).catch(function () {
-            // Element not found in the DOM, try again
-            return false;
-        })
     };
 
     urlChanged(url) {
@@ -106,6 +75,11 @@ class CreateComputerPage {
             return url != actualUrl;
         });
     };
+
+    convertDate(inputDateSrting) {
+        return moment(inputDateSrting, 'Y-M-D').format('DD MMM Y')
+    };
+
 }
 
 module.exports = CreateComputerPage;

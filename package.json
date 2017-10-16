@@ -5,18 +5,14 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "chai-string": "^1.4.0",
-    "expect.js": "^0.3.1",
-    "expect-async": "^0.1.2",
-    "expect": "^21.2.1",
-    "expect-to-be-a-promise": "^1.0.2",
     "assert": "^1.4.1",
     "cucumber": "^3.0.5",
     "cucumber-assert": "^2.0.0",
     "protractor": "^5.1.1",
     "protractor-cucumber-framework": "^4.0.8",
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-async-to-generator": "^6.24.1"
+    "is-generator": "^1.0.3",
+    "bluebird": "^3.5.1",
+    "moment": "^2.19.1"
   },
   "scripts": {
     "prestart-webdriver": "webdriver-manager update",
