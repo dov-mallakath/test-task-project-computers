@@ -18,7 +18,7 @@ exports.config = {
         'features/*.feature'
     ],
     cucumberOpts: {
-        require: ['features/steps/*_steps.js','../support/*.j'],
+        require: ['steps/*_steps.js','../support/*.j'],
         format: ['summary', 'json:./reports/json/cucumber_report.json'],
         strict: true
     },

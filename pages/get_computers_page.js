@@ -1,15 +1,14 @@
-'use strict';
+let CommonPage = require("../pages/common_page");
 
-class GetComputersPage {
+class GetComputersPage extends CommonPage {
 
     constructor() {
-        browser.waitForAngularEnabled(false);
+        super();
         this.computersUrl = "../computers";
         this.searchInput = $("input[id=searchbox]");
         this.searchButton = $("input[id=searchsubmit]");
         this.addButton = $("a[id=add]");
-        this.headerH1 = element(by.xpath("//*[@id=\"main\"]/h1"));
-        this.messageWarning = $("div[class=\"alert-message warning\"]")
+        this.messageWarning = $("div[class=\"alert-message warning\"]");
         this.computersLink = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[1]/a"));
         this.introduced = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[2]"));
         this.discontinued = element.all(by.xpath("//table[@class=\"computers zebra-striped\"]/tbody/tr/td[3]"));
@@ -17,28 +16,23 @@ class GetComputersPage {
     };
 
     openComputersListPage() {
-        browser.get(this.computersUrl);
+        return browser.get(this.computersUrl);
     };
 
     setSearchValue(value) {
-        this.searchInput.sendKeys(value);
+        return this.searchInput.sendKeys(value);
     };
 
     pressSearchButton() {
-        this.searchButton.click();
-    };
-
-    getPageHeader() {
-        return this.headerH1.getText();
+        return this.searchButton.click();
     };
 
     getMessageWarning() {
         return this.messageWarning.getText();
     };
 
-
     addNewComputer() {
-        this.addButton.click();
+        return this.addButton.click();
     }
 
     getFirstComputer() {
@@ -56,18 +50,6 @@ class GetComputersPage {
     getFirstCompany() {
         return this.company.get(0).getText()
     }
-
-    // this.setOperator = function(value) {
-    //   element(by.model('operator')).element(by.cssContainingText('option', value)).click();
-    // };
-    //
-    // this.getResult = function() {
-    //   return element(by.binding('latest')).getText();
-    // };
-    //
-    // this.clickGo = function() {
-    //   element(by.id('gobutton')).click()
-    // }
 }
 
 module.exports = GetComputersPage;

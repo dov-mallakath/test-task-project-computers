@@ -1,10 +1,10 @@
-'use strict';
+let CommonPage = require("../pages/common_page");
 let moment = require('moment');
 
-class CreateComputerPage {
+class CreateComputerPage extends CommonPage {
 
     constructor() {
-        browser.waitForAngularEnabled(false);
+        super();
         this.computerName = $("input[name=name]");
         this.introducedDate = $("input[name=introduced]");
         this.discontinuedDate = $("input[name=discontinued]");
@@ -14,13 +14,8 @@ class CreateComputerPage {
         this.deleteButton = $("input[class=\"btn danger\"]");
         this.deleteButtonArray = element.all(by.xpath("//input[@class='btn danger']"));
         this.errorDivArray = element.all(by.xpath("//div[@class='clearfix error']"));
-        this.headerH1 = element(by.xpath("//*[@id=\"main\"]/h1"));
         this.optionsCompanies = element.all(by.xpath("//select[@name=\"company\"]/option"));
         this.selectedCompany = element(by.xpath("//select[@name=\"company\"]/option[@selected]"))
-    };
-
-    getPageHeader() {
-        return this.headerH1.getText();
     };
 
     getComputerName() {
@@ -36,15 +31,15 @@ class CreateComputerPage {
     };
 
     enterComputerName(computerName) {
-        this.computerName.sendKeys(computerName);
+        return this.computerName.sendKeys(computerName);
     };
 
     enterIntroducedDate(introducedDate) {
-        this.introducedDate.sendKeys(introducedDate);
+        return this.introducedDate.sendKeys(introducedDate);
     };
 
     enterDiscontinuedDate(discontinuedDate) {
-        this.discontinuedDate.sendKeys(discontinuedDate);
+        return this.discontinuedDate.sendKeys(discontinuedDate);
     };
 
     selectManufacturerByIndex(companyIndex) {
@@ -53,17 +48,16 @@ class CreateComputerPage {
         return this.optionsCompanies.get(companyIndex).getText();
     };
 
-
     createNewComputer() {
-        this.createButton.click();
+        return this.createButton.click();
     };
 
     cancelNewComputerCreation() {
-        this.cancelButton.click();
+        return this.cancelButton.click();
     };
 
     deleteComputer() {
-        this.deleteButton.click();
+        return this.deleteButton.click();
     };
 
     getSelectedCompany() {
